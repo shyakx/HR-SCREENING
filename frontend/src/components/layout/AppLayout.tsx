@@ -16,8 +16,10 @@ export function AppLayout({ children }: AppLayoutProps) {
         </div>
         <div className="flex-1 ml-64">
           <Header />
-          <main className="p-6">
-            {children}
+          <main className="p-6 border-l-4 border-gray-300">
+            <div className="bg-white rounded-l-lg p-6 shadow-sm">
+              {children}
+            </div>
           </main>
         </div>
       </div>

@@ -102,7 +102,7 @@ export default function JobsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-700 border-green-300';
+      case 'active': return 'bg-green-600 text-white font-bold uppercase';
       case 'inactive': return 'bg-blue-100 text-blue-700 border-blue-300';
       case 'closed': return 'bg-gray-100 text-gray-700 border-gray-300';
       default: return 'bg-gray-100 text-gray-700 border-gray-300';
@@ -156,13 +156,13 @@ export default function JobsPage() {
                     <span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-200">
                       {job.department}
                     </span>
-                    <span className="px-3 py-1 bg-green-50 text-green-700 text-sm rounded-full border border-green-200">
+                    <span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-200">
                       {job.experienceLevel}
                     </span>
-                    <span className="px-3 py-1 bg-cyan-50 text-cyan-700 text-sm rounded-full border border-cyan-200">
+                    <span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-200">
                       {job.employmentType}
                     </span>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                    <span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-200">
                       {job.location}
                     </span>
                   </div>

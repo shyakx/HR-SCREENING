@@ -22,10 +22,15 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="w-64 bg-gradient-to-b from-blue-900 to-blue-950 shadow-xl flex flex-col h-screen">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-white">HR Screening</h1>
-        <p className="text-sm text-blue-200 mt-1">Powered by AI</p>
+    <div className="w-64 bg-blue-600 flex flex-col h-screen border-r-4 border-blue-600">
+      <div className="p-6 border-b-2 border-blue-700">
+        <div className="flex items-center gap-3">
+          <img src="/image.png" alt="RecruitHub" className="w-10 h-10 rounded-lg" />
+          <div>
+            <h1 className="text-2xl font-bold text-white">RecruitHub</h1>
+            <p className="text-sm text-blue-100 mt-1">Talent Management</p>
+          </div>
+        </div>
       </div>
       
       <nav className="mt-6 flex-1">
@@ -37,18 +42,15 @@ export function Sidebar() {
                 key={item.name}
                 href={item.href}
                 className={`
-                  group flex items-center px-3 py-3 text-sm font-medium rounded-lg mb-2 transition-all
+                  group flex items-center px-3 py-2 text-base font-medium rounded-r-lg mb-1 transition-colors border-l-4
                   ${isActive
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-blue-100 hover:bg-blue-800 hover:text-white'
+                    ? 'bg-blue-700 text-white border-white'
+                    : 'text-blue-100 hover:bg-blue-700 hover:text-white border-transparent'
                   }
                 `}
               >
                 <item.icon
-                  className={`
-                    mr-3 h-5 w-5 flex-shrink-0 transition-colors
-                    ${isActive ? 'text-green-400' : 'text-blue-300 group-hover:text-green-400'}
-                  `}
+                  className="mr-3 h-5 w-5 flex-shrink-0"
                   aria-hidden="true"
                 />
                 {item.name}
@@ -58,10 +60,10 @@ export function Sidebar() {
         </div>
       </nav>
 
-      <div className="p-6">
-        <div className="bg-blue-800/50 rounded-lg p-4 border border-blue-700">
-          <h3 className="text-sm font-medium text-white">Umurava AI Hackathon</h3>
-          <p className="text-xs text-blue-200 mt-1">Talent Screening Solution</p>
+      <div className="p-6 border-t-2 border-blue-700">
+        <div className="bg-blue-700 rounded-r-lg p-4 border-l-4 border-blue-500">
+          <h3 className="text-sm font-medium text-white">HR Platform</h3>
+          <p className="text-xs text-blue-100 mt-1">Talent Screening Solution</p>
         </div>
       </div>
     </div>

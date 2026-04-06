@@ -11,7 +11,7 @@ import {
   Check, 
   Briefcase, 
   Users, 
-  Sparkles, 
+  Search, 
   Bookmark,
   X,
   TrendingUp,
@@ -19,7 +19,6 @@ import {
   Award,
   AlertCircle,
   Loader2,
-  ChevronRight,
   Building2,
   MapPin
 } from 'lucide-react';
@@ -81,42 +80,42 @@ export default function ScreeningPage() {
     switch (rec) {
       case 'highly-recommended': 
         return { 
-          class: 'rec-highly', 
-          icon: <Award className="w-3.5 h-3.5 mr-1.5" />,
-          label: 'Highly Recommended'
+          class: 'bg-green-600 text-white font-bold', 
+          icon: null,
+          label: 'HIGHLY RECOMMENDED'
         };
       case 'recommended': 
         return { 
-          class: 'rec-recommended', 
-          icon: <Check className="w-3.5 h-3.5 mr-1.5" />,
-          label: 'Recommended'
+          class: 'bg-blue-600 text-white font-bold', 
+          icon: null,
+          label: 'RECOMMENDED'
         };
       case 'consider': 
         return { 
-          class: 'rec-consider', 
-          icon: <AlertCircle className="w-3.5 h-3.5 mr-1.5" />,
-          label: 'Consider'
+          class: 'bg-gray-600 text-white font-bold', 
+          icon: null,
+          label: 'CONSIDER'
         };
       case 'not-recommended': 
         return { 
-          class: 'rec-not', 
-          icon: <X className="w-3.5 h-3.5 mr-1.5" />,
-          label: 'Not Recommended'
+          class: 'bg-red-600 text-white font-bold', 
+          icon: null,
+          label: 'NOT RECOMMENDED'
         };
       default: 
         return { 
-          class: 'bg-gray-100 text-gray-600 border border-gray-200', 
+          class: 'bg-gray-200 text-gray-700 font-medium', 
           icon: null,
-          label: 'Pending'
+          label: 'PENDING'
         };
     }
   };
 
   const getScoreStyle = (score: number) => {
-    if (score >= 80) return 'score-high';
-    if (score >= 60) return 'score-mid';
-    if (score >= 40) return 'score-low';
-    return 'score-poor';
+    if (score >= 80) return 'bg-green-600 text-white font-bold';
+    if (score >= 60) return 'bg-blue-600 text-white font-bold';
+    if (score >= 40) return 'bg-gray-600 text-white font-bold';
+    return 'bg-gray-400 text-white font-bold';
   };
 
   const getScoreLabel = (score: number) => {
@@ -138,9 +137,9 @@ export default function ScreeningPage() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-blue-600" />
+                  <Search className="w-5 h-5 text-blue-600" />
                 </div>
-                <h1 className="text-2xl font-semibold text-gray-800">AI Screening</h1>
+                <h1 className="text-2xl font-semibold text-gray-800">Candidate Screening</h1>
               </div>
               <p className="text-gray-500 ml-[52px]">
                 Match candidates to positions with intelligent analysis
@@ -158,7 +157,7 @@ export default function ScreeningPage() {
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-4 h-4 mr-2" />
+                  <Search className="w-4 h-4 mr-2" />
                   Run Analysis
                 </>
               )}
@@ -174,7 +173,7 @@ export default function ScreeningPage() {
                   1
                 </div>
                 <span>Select position</span>
-                <ChevronRight className="w-4 h-4 text-gray-300" />
+                <div className="w-8 h-0.5 bg-gray-300"></div>
               </div>
               <div className={`flex items-center gap-2 ${selectedApplicants.length > 0 ? 'text-blue-600' : ''}`}>
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${
@@ -183,7 +182,7 @@ export default function ScreeningPage() {
                   2
                 </div>
                 <span>Choose candidates</span>
-                <ChevronRight className="w-4 h-4 text-gray-300" />
+                <div className="w-8 h-0.5 bg-gray-300"></div>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs font-medium">
@@ -391,8 +390,8 @@ export default function ScreeningPage() {
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
-                      <TrendingUp className="w-5 h-5 text-green-600" />
+                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+                      <Award className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
                       <h2 className="font-semibold text-gray-800">Match Results</h2>
@@ -415,7 +414,7 @@ export default function ScreeningPage() {
                       <div key={result._id} className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-colors shadow-sm">
                         <div className="flex items-start gap-5">
                           <div className="flex-shrink-0 flex flex-col items-center">
-                            <div className={`score-circle ${getScoreStyle(result.matchScore)}`}>
+                            <div className={`w-14 h-14 rounded-full flex items-center justify-center text-lg font-semibold ${getScoreStyle(result.matchScore)}`}>
                               {result.matchScore}%
                             </div>
                             <span className="text-xs text-gray-500 mt-2 font-medium">
@@ -438,8 +437,7 @@ export default function ScreeningPage() {
                                   {(result.applicantId as any)?.email || ''}
                                 </p>
                               </div>
-                              <span className={`rec-badge ${recBadge.class}`}>
-                                {recBadge.icon}
+                              <span className={`px-3 py-1 rounded-md text-xs font-bold ${recBadge.class}`}>
                                 {recBadge.label}
                               </span>
                             </div>
@@ -447,23 +445,21 @@ export default function ScreeningPage() {
                             <p className="text-gray-600 mb-5 leading-relaxed">{result.reasoning}</p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                                <h4 className="text-sm font-medium text-green-800 mb-3 flex items-center gap-2">
-                                  <TrendingUp className="w-4 h-4" />
+                              <div className="bg-blue-500 rounded-lg p-4">
+                                <h4 className="text-sm font-medium text-white mb-3">
                                   Strengths
                                 </h4>
                                 <ul className="space-y-2">
                                   {result.strengths.map((strength, idx) => (
-                                    <li key={idx} className="text-sm text-gray-600 flex items-start gap-2">
-                                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-2 flex-shrink-0" />
+                                    <li key={idx} className="text-sm text-white flex items-start gap-2">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 flex-shrink-0" />
                                       {strength}
                                     </li>
                                   ))}
                                 </ul>
                               </div>
                               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                                <h4 className="text-sm font-medium text-gray-800 mb-3 flex items-center gap-2">
-                                  <TrendingDown className="w-4 h-4" />
+                                <h4 className="text-sm font-medium text-gray-800 mb-3">
                                   Gaps
                                 </h4>
                                 <ul className="space-y-2">

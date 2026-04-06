@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchShortlists, deleteShortlist } from '@/store/slices/screeningSlice';
 import { RootState, AppDispatch } from '@/store';
@@ -13,23 +13,40 @@ export default function ShortlistsPage() {
   
   const [viewShortlist, setViewShortlist] = useState<Shortlist | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+  const lastFetchTime = useRef<number>(0);
+  const FETCH_COOLDOWN = 5000; // 5 seconds cooldown between fetches
 
   useEffect(() => {
-    dispatch(fetchShortlists());
+    const now = Date.now();
+    // Only fetch if it's been more than 5 seconds since last fetch
+    if (now - lastFetchTime.current > FETCH_COOLDOWN) {
+      lastFetchTime.current = now;
+      dispatch(fetchShortlists());
+    }
   }, [dispatch]);
 
   const handleDelete = (shortlistId: string) => {
     dispatch(deleteShortlist(shortlistId));
     setDeleteConfirm(null);
+    // Reset cooldown to allow immediate refresh after delete
+    lastFetchTime.current = 0;
+  };
+
+  const handleRefresh = () => {
+    const now = Date.now();
+    if (now - lastFetchTime.current > FETCH_COOLDOWN) {
+      lastFetchTime.current = now;
+      dispatch(fetchShortlists());
+    }
   };
 
   const getRecommendationColor = (rec: string) => {
     switch (rec) {
-      case 'highly-recommended': return 'bg-green-100 text-green-700 border-green-300';
-      case 'recommended': return 'bg-blue-100 text-blue-700 border-blue-300';
-      case 'consider': return 'bg-cyan-100 text-cyan-700 border-cyan-300';
-      case 'not-recommended': return 'bg-gray-100 text-gray-700 border-gray-300';
-      default: return 'bg-gray-100 text-gray-700 border-gray-300';
+      case 'highly-recommended': return 'bg-green-600 text-white font-bold';
+      case 'recommended': return 'bg-blue-600 text-white font-bold';
+      case 'consider': return 'bg-gray-600 text-white font-bold';
+      case 'not-recommended': return 'bg-red-600 text-white font-bold';
+      default: return 'bg-gray-200 text-gray-700 font-medium';
     }
   };
 
@@ -37,9 +54,16 @@ export default function ShortlistsPage() {
     <AppLayout>
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Shortlists</h1>
-          <p className="text-gray-600 mt-1">View and manage saved candidate shortlists</p>
+          <h1 className="text-4xl font-bold text-gray-900">Shortlists</h1>
+          <p className="text-gray-500 mt-2 text-base">View and manage saved candidate shortlists</p>
         </div>
+        <button 
+          onClick={handleRefresh}
+          className="btn btn-secondary"
+          title="Refresh shortlists"
+        >
+          ↻ Refresh
+        </button>
       </div>
 
       {loading ? (
@@ -55,12 +79,12 @@ export default function ShortlistsPage() {
       ) : (
         <div className="grid gap-6">
           {shortlists.map((shortlist: any) => (
-            <div key={shortlist._id} className="card p-6 hover:shadow-md transition-shadow">
+            <div key={shortlist._id} className="card p-6 hover:shadow-md transition-shadow border-l-4 border-blue-500">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-800 mb-1">{shortlist.title}</h2>
+                  <h2 className="text-xl font-bold text-gray-900 mb-1">{shortlist.title}</h2>
                   <p className="text-gray-600">
-                    For: <span className="font-medium">{(shortlist.jobId as any)?.title || 'Unknown Job'}</span>
+                    For: <span className="font-semibold">{(shortlist.jobId as any)?.title || 'Unknown Job'}</span>
                   </p>
                   <p className="text-sm text-gray-500">
                     Created {new Date(shortlist.createdAt).toLocaleDateString()} • {shortlist.candidates?.length || 0} candidates selected from {shortlist.totalApplicants} applicants
@@ -83,28 +107,28 @@ export default function ShortlistsPage() {
               </div>
 
               <div className="border-t border-gray-200 pt-4">
-                <h3 className="font-medium text-gray-800 mb-3">Top Candidates:</h3>
+                <h3 className="font-semibold text-gray-900 mb-3">Top Candidates:</h3>
                 <div className="grid gap-3">
                   {shortlist.candidates?.slice(0, 3).map((candidate: any) => (
-                    <div key={candidate._id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold border-2 ${
-                        candidate.matchScore >= 80 ? 'bg-green-100 text-green-700 border-green-400' :
-                        candidate.matchScore >= 60 ? 'bg-blue-100 text-blue-700 border-blue-400' :
-                        candidate.matchScore >= 40 ? 'bg-cyan-100 text-cyan-700 border-cyan-400' :
-                        'bg-gray-100 text-gray-600 border-gray-300'
+                    <div key={candidate._id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-l-3 border-blue-300">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold ${
+                        candidate.matchScore >= 80 ? 'bg-green-600 text-white' :
+                        candidate.matchScore >= 60 ? 'bg-blue-600 text-white' :
+                        candidate.matchScore >= 40 ? 'bg-gray-600 text-white' :
+                        'bg-gray-400 text-white'
                       }`}>
                         {candidate.matchScore}%
                       </div>
                       <div className="flex-1">
-                        <p className="font-medium text-gray-800">
+                        <p className="font-semibold text-gray-900">
                           {(candidate.applicantId as any)?.name || 'Unknown'}
                         </p>
                         <p className="text-sm text-gray-600">
                           Rank #{candidate.rank} • {(candidate.applicantId as any)?.email}
                         </p>
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getRecommendationColor(candidate.recommendation)}`}>
-                        {candidate.recommendation.replace('-', ' ')}
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${getRecommendationColor(candidate.recommendation)}`}>
+                        {candidate.recommendation.replace('-', ' ').toUpperCase()}
                       </span>
                     </div>
                   ))}
@@ -126,7 +150,7 @@ export default function ShortlistsPage() {
           <div className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="p-6 border-b border-gray-200 flex justify-between items-center">
               <div>
-                <h3 className="text-xl font-semibold text-gray-800">{viewShortlist.title}</h3>
+                <h3 className="text-2xl font-bold text-gray-900">{viewShortlist.title}</h3>
                 <p className="text-gray-600">
                   For: {(viewShortlist.jobId as any)?.title}
                 </p>
@@ -140,20 +164,20 @@ export default function ShortlistsPage() {
             </div>
             <div className="p-6 space-y-4">
               {viewShortlist.candidates?.map((candidate: any) => (
-                <div key={candidate._id} className="border border-gray-200 rounded-xl p-4">
+                <div key={candidate._id} className="border border-gray-200 rounded-xl p-4 border-l-4 border-blue-500">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold border-2 ${
-                      candidate.matchScore >= 80 ? 'bg-green-100 text-green-700 border-green-400' :
-                      candidate.matchScore >= 60 ? 'bg-blue-100 text-blue-700 border-blue-400' :
-                      candidate.matchScore >= 40 ? 'bg-cyan-100 text-cyan-700 border-cyan-400' :
-                      'bg-gray-100 text-gray-600 border-gray-300'
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold ${
+                      candidate.matchScore >= 80 ? 'bg-green-600 text-white' :
+                      candidate.matchScore >= 60 ? 'bg-blue-600 text-white' :
+                      candidate.matchScore >= 40 ? 'bg-gray-600 text-white' :
+                      'bg-gray-400 text-white'
                     }`}>
                       {candidate.matchScore}%
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-start">
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-800">
+                          <h4 className="text-lg font-bold text-gray-900">
                             {(candidate.applicantId as any)?.name || 'Unknown Candidate'}
                           </h4>
                           <p className="text-gray-600">{(candidate.applicantId as any)?.email}</p>
@@ -161,8 +185,8 @@ export default function ShortlistsPage() {
                             Rank #{candidate.rank} • {(candidate.applicantId as any)?.experience?.years} years experience
                           </p>
                         </div>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getRecommendationColor(candidate.recommendation)}`}>
-                          {candidate.recommendation.replace('-', ' ')}
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${getRecommendationColor(candidate.recommendation)}`}>
+                          {candidate.recommendation.replace('-', ' ').toUpperCase()}
                         </span>
                       </div>
                     </div>
@@ -171,23 +195,23 @@ export default function ShortlistsPage() {
                   <p className="text-gray-700 mb-4">{candidate.reasoning}</p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <h5 className="text-sm font-medium text-green-700 mb-2">Strengths</h5>
-                      <ul className="space-y-1">
+                    <div className="bg-blue-600 rounded-lg p-4">
+                      <h5 className="text-sm font-medium text-white mb-3">Strengths</h5>
+                      <ul className="space-y-2">
                         {candidate.strengths.map((strength: string, idx: number) => (
-                          <li key={idx} className="text-sm text-gray-600 flex items-start">
-                            <span className="text-green-500 mr-2">+</span>
+                          <li key={idx} className="text-sm text-white flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 flex-shrink-0" />
                             {strength}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div>
-                      <h5 className="text-sm font-medium text-gray-700 mb-2">Gaps</h5>
-                      <ul className="space-y-1">
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <h5 className="text-sm font-medium text-gray-800 mb-3">Gaps</h5>
+                      <ul className="space-y-2">
                         {candidate.gaps.map((gap: string, idx: number) => (
-                          <li key={idx} className="text-sm text-gray-600 flex items-start">
-                            <span className="text-gray-400 mr-2">-</span>
+                          <li key={idx} className="text-sm text-gray-600 flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0" />
                             {gap}
                           </li>
                         ))}
