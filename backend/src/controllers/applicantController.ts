@@ -334,6 +334,49 @@ export class ApplicantController {
     }
   }
 
+  static async createPublicApplication(req: Request, res: Response) {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          success: false,
+          message: 'Validation errors',
+          errors: errors.array()
+        });
+      }
+
+      const applicationData = req.body;
+      
+      // Set source to 'external' for public applications
+      applicationData.source = 'external';
+      
+      const applicant = new Applicant(applicationData);
+      
+      await applicant.save();
+      
+      // TODO: Send confirmation email to applicant
+      // TODO: Send notification email to HR team
+      
+      res.status(201).json({
+        success: true,
+        data: applicant,
+        message: 'Application submitted successfully! We will contact you soon.'
+      });
+    } catch (error: any) {
+      if (error.code === 11000) {
+        return res.status(400).json({
+          success: false,
+          message: 'An application with this email already exists. Please contact us if you need to update your information.'
+        });
+      }
+      
+      res.status(500).json({
+        success: false,
+        message: `Failed to submit application: ${error.message}`
+      });
+    }
+  }
+
   static validateApplicant() {
     return [
       body('name').trim().notEmpty().withMessage('Applicant name is required'),
@@ -348,6 +391,28 @@ export class ApplicantController {
       body('education.*.field').notEmpty().withMessage('Field of study is required'),
       body('education.*.institution').notEmpty().withMessage('Institution is required'),
       body('education.*.year').isNumeric().withMessage('Graduation year must be numeric'),
+    ];
+  }
+
+  static validatePublicApplication() {
+    return [
+      body('name').trim().notEmpty().withMessage('Full name is required'),
+      body('email').isEmail().withMessage('Valid email is required'),
+      body('phone').trim().notEmpty().withMessage('Phone number is required'),
+      body('location').trim().notEmpty().withMessage('Location is required'),
+      body('experienceYears').isNumeric().withMessage('Experience years must be numeric'),
+      body('experienceLevel').isIn(['entry', 'mid', 'senior', 'executive']).withMessage('Invalid experience level'),
+      body('skills').isArray({ min: 1 }).withMessage('At least one skill is required'),
+      body('education').isArray({ min: 1 }).withMessage('Education information is required'),
+      body('education.*.degree').notEmpty().withMessage('Degree is required'),
+      body('education.*.field').notEmpty().withMessage('Field of study is required'),
+      body('education.*.institution').notEmpty().withMessage('Institution is required'),
+      body('education.*.year').isNumeric().withMessage('Graduation year must be numeric'),
+      body('workHistory').isArray({ min: 1 }).withMessage('Work history is required'),
+      body('workHistory.*.company').notEmpty().withMessage('Company is required'),
+      body('workHistory.*.position').notEmpty().withMessage('Position is required'),
+      body('workHistory.*.duration').notEmpty().withMessage('Duration is required'),
+      body('workHistory.*.description').notEmpty().withMessage('Job description is required'),
     ];
   }
 }

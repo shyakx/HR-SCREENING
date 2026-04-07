@@ -86,12 +86,12 @@ export default function DashboardPage() {
                         <h3 className="font-semibold text-gray-900">{job.title}</h3>
                         <p className="text-sm text-gray-600">{job.department} • {job.location}</p>
                       </div>
-                      <span className={`px-3 py-1 text-xs font-bold rounded-full ${
+                      <span className={`px-3 py-1 text-xs font-bold rounded-full uppercase ${
                         job.status === 'active' ? 'bg-green-600 text-white' :
-                        job.status === 'inactive' ? 'bg-blue-100 text-blue-700' :
-                        'bg-gray-100 text-gray-700'
+                        job.status === 'inactive' ? 'bg-orange-500 text-white' :
+                        'bg-red-600 text-white'
                       }`}>
-                        {job.status.toUpperCase()}
+                        {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
                       </span>
                     </div>
                   ))

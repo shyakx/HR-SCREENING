@@ -7,7 +7,8 @@ import {
   UserGroupIcon, 
   ClipboardDocumentListIcon,
   ChartBarIcon,
-  StarIcon
+  StarIcon,
+  GlobeAltIcon
 } from '@heroicons/react/24/outline'
 
 const navigation = [
@@ -16,6 +17,7 @@ const navigation = [
   { name: 'Applicants', href: '/applicants', icon: UserGroupIcon },
   { name: 'Screening', href: '/screening', icon: ClipboardDocumentListIcon },
   { name: 'Shortlists', href: '/shortlists', icon: StarIcon },
+  { name: 'Public Career Portal', href: '/jobs/public', icon: GlobeAltIcon },
 ]
 
 export function Sidebar() {

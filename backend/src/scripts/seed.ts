@@ -75,8 +75,9 @@ const seedData = async () => {
     ]);
     console.log(`Created ${jobs.length} jobs`);
 
-    // Create sample applicants - Rwanda-based
+    // Create sample applicants - Rwanda, Nigeria, and East Africa
     const applicants = await Applicant.create([
+      // Rwanda-based applicants
       {
         name: 'Jean-Pierre Mugisha',
         email: 'jeanpierre.mugisha@gmail.com',
@@ -92,7 +93,6 @@ const seedData = async () => {
           { company: 'Yego Innovision', position: 'Full Stack Developer', duration: '2018-2020', description: 'Built MVP' }
         ],
         source: 'external',
-        status: 'active',
         resumeUrl: 'https://example.com/resume1.pdf'
       },
       {
@@ -109,7 +109,6 @@ const seedData = async () => {
           { company: 'Bank of Kigali', position: 'Backend Developer', duration: '2020-Present', description: 'API development' }
         ],
         source: 'umurava',
-        status: 'active',
         resumeUrl: 'https://example.com/resume2.pdf'
       },
       {
@@ -127,7 +126,6 @@ const seedData = async () => {
           { company: 'Airtel Rwanda', position: 'Senior Java Developer', duration: '2016-2019', description: 'Backend development' }
         ],
         source: 'external',
-        status: 'active',
         resumeUrl: 'https://example.com/resume3.pdf'
       },
       {
@@ -144,7 +142,6 @@ const seedData = async () => {
           { company: 'M-Pesa Rwanda', position: 'Associate PM', duration: '2021-Present', description: 'Feature prioritization' }
         ],
         source: 'external',
-        status: 'active',
         resumeUrl: 'https://example.com/resume4.pdf'
       },
       {
@@ -161,7 +158,6 @@ const seedData = async () => {
           { company: 'IremboGov', position: 'Junior Developer', duration: '2022-Present', description: 'Client websites' }
         ],
         source: 'umurava',
-        status: 'active',
         resumeUrl: 'https://example.com/resume5.pdf'
       },
       {
@@ -179,7 +175,6 @@ const seedData = async () => {
           { company: 'Yego Innovision', position: 'UX Designer', duration: '2017-2020', description: 'Mobile app design' }
         ],
         source: 'external',
-        status: 'active',
         resumeUrl: 'https://example.com/resume6.pdf'
       },
       {
@@ -196,7 +191,6 @@ const seedData = async () => {
           { company: 'Bank of Kigali', position: 'DevOps Engineer', duration: '2019-Present', description: 'CI/CD pipeline' }
         ],
         source: 'external',
-        status: 'active',
         resumeUrl: 'https://example.com/resume7.pdf'
       },
       {
@@ -216,8 +210,309 @@ const seedData = async () => {
           { company: 'HeHe Labs', position: 'Senior Developer', duration: '2015-2018', description: 'Full stack development' }
         ],
         source: 'external',
-        status: 'active',
         resumeUrl: 'https://example.com/resume8.pdf'
+      },
+      {
+        name: 'Eric Mutabazi',
+        email: 'eric.mutabazi@gmail.com',
+        phone: '+250-788-345-678',
+        location: 'Musanze, Rwanda',
+        experience: { years: 4, level: 'mid' },
+        skills: ['Python', 'Machine Learning', 'TensorFlow', 'Data Analysis', 'Pandas'],
+        education: [
+          { degree: 'Master of Science', field: 'Artificial Intelligence', institution: 'Carnegie Mellon University Africa', year: 2021 }
+        ],
+        workHistory: [
+          { company: 'Zipline Rwanda', position: 'Data Scientist', duration: '2021-Present', description: 'ML models for delivery optimization' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume9.pdf'
+      },
+      {
+        name: 'Josiane Bimenyimana',
+        email: 'josiane.bimenyimana@yahoo.com',
+        phone: '+250-735-456-789',
+        location: 'Butare, Rwanda',
+        experience: { years: 1, level: 'entry' },
+        skills: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'WordPress'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Web Development', institution: 'University of Rwanda', year: 2023 }
+        ],
+        workHistory: [
+          { company: 'Freelance', position: 'Web Developer', duration: '2023-Present', description: 'Small business websites' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume10.pdf'
+      },
+
+      // Nigerian applicants
+      {
+        name: 'Chukwuemeka Okafor',
+        email: 'chukwuemeka.okafor@gmail.com',
+        phone: '+234-803-456-7890',
+        location: 'Lagos, Nigeria',
+        experience: { years: 7, level: 'senior' },
+        skills: ['React', 'Node.js', 'MongoDB', 'AWS', 'Docker'],
+        education: [
+          { degree: 'Bachelor of Engineering', field: 'Computer Engineering', institution: 'University of Lagos', year: 2017 }
+        ],
+        workHistory: [
+          { company: 'Paystack', position: 'Senior Backend Engineer', duration: '2020-Present', description: 'Payment processing systems' },
+          { company: 'Andela', position: 'Full Stack Developer', duration: '2017-2020', description: 'Client projects' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume11.pdf'
+      },
+      {
+        name: 'Funke Adebayo',
+        email: 'funke.adebayo@yahoo.com',
+        phone: '+234-809-123-4567',
+        location: 'Abuja, Nigeria',
+        experience: { years: 5, level: 'mid' },
+        skills: ['Product Management', 'Agile', 'Scrum', 'Data Analysis', 'SQL'],
+        education: [
+          { degree: 'Master of Business Administration', field: 'Technology Management', institution: 'Lagos Business School', year: 2019 }
+        ],
+        workHistory: [
+          { company: 'Flutterwave', position: 'Product Manager', duration: '2021-Present', description: 'Fintech product development' },
+          { company: 'Interswitch', position: 'Associate Product Manager', duration: '2019-2021', description: 'Payment solutions' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume12.pdf'
+      },
+      {
+        name: 'Adeola Johnson',
+        email: 'adeola.johnson@gmail.com',
+        phone: '+234-810-987-6543',
+        location: 'Port Harcourt, Nigeria',
+        experience: { years: 3, level: 'mid' },
+        skills: ['Python', 'Django', 'PostgreSQL', 'Redis', 'Celery'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Computer Science', institution: 'University of Port Harcourt', year: 2021 }
+        ],
+        workHistory: [
+          { company: 'Andela', position: 'Backend Developer', duration: '2021-Present', description: 'API development and maintenance' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume13.pdf'
+      },
+      {
+        name: 'Ibrahim Musa',
+        email: 'ibrahim.musa@gmail.com',
+        phone: '+234-806-234-5678',
+        location: 'Kano, Nigeria',
+        experience: { years: 9, level: 'executive' },
+        skills: ['Cloud Architecture', 'AWS', 'Azure', 'DevOps', 'Team Leadership'],
+        education: [
+          { degree: 'Master of Science', field: 'Cloud Computing', institution: 'Covenant University', year: 2015 },
+          { degree: 'Bachelor of Science', field: 'Computer Science', institution: 'Ahmadu Bello University', year: 2013 }
+        ],
+        workHistory: [
+          { company: 'Microsoft Nigeria', position: 'Cloud Solutions Architect', duration: '2019-Present', description: 'Enterprise cloud solutions' },
+          { company: 'Glo Nigeria', position: 'Head of Infrastructure', duration: '2016-2019', description: 'Network and cloud infrastructure' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume14.pdf'
+      },
+      {
+        name: 'Ngozi Eze',
+        email: 'ngozi.eze@yahoo.com',
+        phone: '+234-805-678-9012',
+        location: 'Enugu, Nigeria',
+        experience: { years: 2, level: 'entry' },
+        skills: ['UI/UX Design', 'Figma', 'Adobe Creative Suite', 'Prototyping'],
+        education: [
+          { degree: 'Bachelor of Arts', field: 'Graphic Design', institution: 'University of Nigeria', year: 2022 }
+        ],
+        workHistory: [
+          { company: 'Freelance', position: 'UI Designer', duration: '2022-Present', description: 'Mobile app and web design' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume15.pdf'
+      },
+      {
+        name: 'Tunde Adekunle',
+        email: 'tunde.adekunle@gmail.com',
+        phone: '+234-814-345-6789',
+        location: 'Ibadan, Nigeria',
+        experience: { years: 6, level: 'senior' },
+        skills: ['Java', 'Spring Boot', 'Microservices', 'Kubernetes', 'MongoDB'],
+        education: [
+          { degree: 'Bachelor of Engineering', field: 'Software Engineering', institution: 'Obafemi Awolowo University', year: 2018 }
+        ],
+        workHistory: [
+          { company: 'Interswitch', position: 'Senior Java Developer', duration: '2020-Present', description: 'Payment gateway development' },
+          { company: 'SystemSpecs', position: 'Software Developer', duration: '2018-2020', description: 'Banking software solutions' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume16.pdf'
+      },
+
+      // East African applicants (Kenya, Uganda, Tanzania)
+      {
+        name: 'Joseph Mwangi',
+        email: 'joseph.mwangi@gmail.com',
+        phone: '+254-712-345-678',
+        location: 'Nairobi, Kenya',
+        experience: { years: 5, level: 'mid' },
+        skills: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'GraphQL'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Computer Science', institution: 'University of Nairobi', year: 2019 }
+        ],
+        workHistory: [
+          { company: 'Safaricom', position: 'Full Stack Developer', duration: '2021-Present', description: 'M-Pesa platform development' },
+          { company: 'M-Pesa', position: 'Frontend Developer', duration: '2019-2021', description: 'Mobile money applications' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume17.pdf'
+      },
+      {
+        name: 'Grace Wanjiru',
+        email: 'grace.wanjiru@yahoo.com',
+        phone: '+254-722-456-789',
+        location: 'Mombasa, Kenya',
+        experience: { years: 4, level: 'mid' },
+        skills: ['Data Science', 'Python', 'Machine Learning', 'TensorFlow', 'Pandas'],
+        education: [
+          { degree: 'Master of Science', field: 'Data Science', institution: 'Strathmore University', year: 2020 }
+        ],
+        workHistory: [
+          { company: 'Twiga Foods', position: 'Data Scientist', duration: '2020-Present', description: 'Supply chain analytics' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume18.pdf'
+      },
+      {
+        name: 'David Kamau',
+        email: 'david.kamau@gmail.com',
+        phone: '+254-734-567-890',
+        location: 'Kisumu, Kenya',
+        experience: { years: 8, level: 'senior' },
+        skills: ['DevOps', 'AWS', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Information Technology', institution: 'Kenyatta University', year: 2016 }
+        ],
+        workHistory: [
+          { company: 'Amazon Web Services', position: 'Solutions Architect', duration: '2020-Present', description: 'Cloud architecture consulting' },
+          { company: 'Cellulant', position: 'DevOps Engineer', duration: '2016-2020', description: 'Payment platform infrastructure' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume19.pdf'
+      },
+      {
+        name: 'Sarah Njeri',
+        email: 'sarah.njeri@gmail.com',
+        phone: '+254-711-234-567',
+        location: 'Nakuru, Kenya',
+        experience: { years: 3, level: 'mid' },
+        skills: ['UI/UX Design', 'Figma', 'Adobe XD', 'User Research', 'Prototyping'],
+        education: [
+          { degree: 'Bachelor of Design', field: 'Interaction Design', institution: 'Nairobi Design Institute', year: 2021 }
+        ],
+        workHistory: [
+          { company: 'Jumia Kenya', position: 'UX Designer', duration: '2021-Present', description: 'E-commerce platform design' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume20.pdf'
+      },
+      {
+        name: 'Michael Okello',
+        email: 'michael.okello@gmail.com',
+        phone: '+256-772-123-456',
+        location: 'Kampala, Uganda',
+        experience: { years: 6, level: 'senior' },
+        skills: ['Python', 'Django', 'PostgreSQL', 'Redis', 'Docker', 'AWS'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Software Engineering', institution: 'Makerere University', year: 2018 }
+        ],
+        workHistory: [
+          { company: 'MTN Uganda', position: 'Senior Backend Developer', duration: '2020-Present', description: 'Mobile money platform' },
+          { company: 'Stanbic Bank Uganda', position: 'Software Developer', duration: '2018-2020', description: 'Banking applications' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume21.pdf'
+      },
+      {
+        name: 'Rebecca Namulondo',
+        email: 'rebecca.namulondo@yahoo.com',
+        phone: '+256-752-456-789',
+        location: 'Entebbe, Uganda',
+        experience: { years: 4, level: 'mid' },
+        skills: ['Product Management', 'Agile', 'Data Analysis', 'SQL', 'Jira'],
+        education: [
+          { degree: 'Master of Business Administration', field: 'Project Management', institution: 'Uganda Management Institute', year: 2020 }
+        ],
+        workHistory: [
+          { company: 'Airtel Uganda', position: 'Product Manager', duration: '2020-Present', description: 'Digital products development' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume22.pdf'
+      },
+      {
+        name: 'James Katumba',
+        email: 'james.katumba@gmail.com',
+        phone: '+256-782-345-678',
+        location: 'Jinja, Uganda',
+        experience: { years: 2, level: 'entry' },
+        skills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'Git'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Computer Science', institution: 'Kyambogo University', year: 2022 }
+        ],
+        workHistory: [
+          { company: 'Freelance', position: 'Full Stack Developer', duration: '2022-Present', description: 'Web development projects' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume23.pdf'
+      },
+      {
+        name: 'Aisha Hassan',
+        email: 'aisha.hassan@gmail.com',
+        phone: '+255-754-123-456',
+        location: 'Dar es Salaam, Tanzania',
+        experience: { years: 5, level: 'mid' },
+        skills: ['Mobile Development', 'React Native', 'Flutter', 'Firebase', 'iOS', 'Android'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Computer Science', institution: 'University of Dar es Salaam', year: 2019 }
+        ],
+        workHistory: [
+          { company: 'Tigo Tanzania', position: 'Mobile App Developer', duration: '2021-Present', description: 'Mobile banking applications' },
+          { company: 'NMB Bank', position: 'Junior Mobile Developer', duration: '2019-2021', description: 'Banking app development' }
+        ],
+        source: 'umurava',
+        resumeUrl: 'https://example.com/resume24.pdf'
+      },
+      {
+        name: 'Mohamed Ali',
+        email: 'mohamed.ali@yahoo.com',
+        phone: '+255-765-456-789',
+        location: 'Arusha, Tanzania',
+        experience: { years: 7, level: 'senior' },
+        skills: ['Cloud Computing', 'AWS', 'Azure', 'DevOps', 'Python', 'Terraform'],
+        education: [
+          { degree: 'Master of Science', field: 'Cloud Architecture', institution: 'Arusha Technical College', year: 2017 }
+        ],
+        workHistory: [
+          { company: 'CRDB Bank', position: 'Cloud Engineer', duration: '2020-Present', description: 'Banking cloud migration' },
+          { company: 'Vodacom Tanzania', position: 'Senior DevOps Engineer', duration: '2017-2020', description: 'Telecom infrastructure' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume25.pdf'
+      },
+      {
+        name: 'Fatuma Mwanga',
+        email: 'fatuma.mwanga@gmail.com',
+        phone: '+255-756-789-012',
+        location: 'Mwanza, Tanzania',
+        experience: { years: 3, level: 'mid' },
+        skills: ['Data Analysis', 'Python', 'SQL', 'Excel', 'Tableau', 'Power BI'],
+        education: [
+          { degree: 'Bachelor of Science', field: 'Statistics', institution: 'University of Dar es Salaam', year: 2021 }
+        ],
+        workHistory: [
+          { company: 'Tanzania Revenue Authority', position: 'Data Analyst', duration: '2021-Present', description: 'Tax data analysis and reporting' }
+        ],
+        source: 'external',
+        resumeUrl: 'https://example.com/resume26.pdf'
       }
     ]);
     console.log(`Created ${applicants.length} applicants`);

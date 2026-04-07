@@ -103,9 +103,9 @@ export default function JobsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-green-600 text-white font-bold uppercase';
-      case 'inactive': return 'bg-blue-100 text-blue-700 border-blue-300';
-      case 'closed': return 'bg-gray-100 text-gray-700 border-gray-300';
-      default: return 'bg-gray-100 text-gray-700 border-gray-300';
+      case 'inactive': return 'bg-orange-500 text-white font-bold uppercase';
+      case 'closed': return 'bg-red-600 text-white font-bold uppercase';
+      default: return 'bg-gray-500 text-white font-bold uppercase';
     }
   };
 
@@ -148,7 +148,7 @@ export default function JobsPage() {
                   <div className="flex items-center gap-3 mb-2">
                     <h2 className="text-xl font-semibold text-gray-900">{job.title}</h2>
                     <span className={`px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(job.status)}`}>
-                      {job.status}
+                      {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
                     </span>
                   </div>
                   <p className="text-gray-600 mb-3">{job.description}</p>

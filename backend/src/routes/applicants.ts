@@ -10,5 +10,6 @@ router.put('/:id', ApplicantController.validateApplicant(), ApplicantController.
 router.delete('/:id', ApplicantController.deleteApplicant);
 router.post('/upload', uploadMiddleware, ApplicantController.uploadApplicants);
 router.post('/upload-resume', uploadMiddleware, ApplicantController.uploadResumePDF);
+router.post('/public-apply', ApplicantController.validatePublicApplication(), ApplicantController.createPublicApplication);
 
 export default router;
