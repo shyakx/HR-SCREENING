@@ -2,6 +2,11 @@
 
 A modern recruitment platform that helps hiring teams efficiently evaluate and shortlist candidates using AI-powered analysis. Built for the Umurava AI Hackathon, this system streamlines the hiring process by intelligently matching job requirements with applicant profiles using Google's Gemini AI.
 
+## 🎥 Demo Video
+
+Watch RecruitHub in action:
+[![RecruitHub Demo](https://img.youtube.com/vi/FObyLIV-G_c/0.jpg)](https://www.youtube.com/watch?v=FObyLIV-G_c)
+
 ## What It Does
 
 RecruitHub transforms how hiring teams evaluate candidates:
