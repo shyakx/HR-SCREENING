@@ -32,6 +32,6 @@ coverage/
 *.test.js
 *.test.ts
 test-*.js
-list-models.js
-test-*.js
-test-model.js
+# list-models.js
+# test-*.js
+# test-model.js
