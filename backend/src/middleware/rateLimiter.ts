@@ -50,7 +50,7 @@ export const rateLimiters = {
   // Strict rate limit for AI screening (expensive operation)
   screening: createRateLimiter({
     windowMs: 5 * 60 * 1000, // 5 minutes
-    max: 10, // Limit each IP to 10 screening requests per 5 minutes
+    max: 20, // Increased to 20 screening requests per 5 minutes
     message: {
       success: false,
       error: 'Screening rate limit exceeded. Please try again in 5 minutes.',

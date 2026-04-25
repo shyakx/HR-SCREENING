@@ -234,7 +234,7 @@ export default function PublicJobsPage() {
                         </div>
                       </div>
                       <p className="text-sm text-gray-500">
-                        Posted {new Date(job.createdAt).toLocaleDateString('en-US', { 
+                        Posted {new Date(typeof job.createdAt === 'string' ? job.createdAt : job.createdAt.toISOString()).toLocaleDateString('en-US', { 
                           year: 'numeric', 
                           month: 'long', 
                           day: 'numeric' 

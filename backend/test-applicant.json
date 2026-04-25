@@ -1,0 +1,28 @@
+{
+  "name": "Test Candidate",
+  "email": "test.candidate@example.com",
+  "phone": "+250788123456",
+  "location": "Kigali, Rwanda",
+  "experience": {
+    "years": 4,
+    "level": "mid"
+  },
+  "skills": ["JavaScript", "React", "Node.js", "Git", "TypeScript", "MongoDB"],
+  "education": [
+    {
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "institution": "University of Rwanda",
+      "year": 2020
+    }
+  ],
+  "workHistory": [
+    {
+      "company": "Tech Company Rwanda",
+      "position": "Software Developer",
+      "duration": "2 years",
+      "description": "Developed web applications using React and Node.js"
+    }
+  ],
+  "source": "external"
+}

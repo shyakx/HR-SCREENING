@@ -44,6 +44,7 @@ export interface Applicant {
   resumeUrl?: string;
   linkedinUrl?: string;
   portfolioUrl?: string;
+  appliedJobs: string[];
   source: 'umurava' | 'external';
   createdAt: Date;
   updatedAt: Date;
@@ -75,6 +76,7 @@ export interface Shortlist {
   title: string;
   candidates: ScreeningResult[];
   totalApplicants: number;
+  status?: 'active' | 'inactive' | 'archived';
   createdAt: Date;
   updatedAt: Date;
 }

@@ -25,6 +25,8 @@ export function Header() {
         return 'Screening'
       case '/shortlists':
         return 'Shortlists'
+      case '/talent-pool':
+        return 'Talent Pool'
       default:
         return 'RecruitHub'
     }

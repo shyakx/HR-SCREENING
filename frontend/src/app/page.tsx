@@ -23,13 +23,13 @@ export default function DashboardPage() {
 
   const activeJobs = jobs.filter(j => j.status === 'active').length;
   const totalApplicants = applicants.length;
-  const screeningsRun = results.length > 0 ? Math.floor(results.length / 2) : 0;
+  const screeningsRun = results.length;
   const pendingReview = applicants.filter(a => !shortlists.some(s => 
     s.candidates?.some((c: any) => (c.applicantId as any)?._id === a._id)
   )).length;
 
-  const recentJobs = [...jobs].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3);
-  const recentShortlists = [...shortlists].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3);
+  const recentJobs = [...jobs].sort((a, b) => new Date(typeof b.createdAt === 'string' ? b.createdAt : b.createdAt.toISOString()).getTime() - new Date(typeof a.createdAt === 'string' ? a.createdAt : a.createdAt.toISOString()).getTime()).slice(0, 3);
+  const recentShortlists = [...shortlists].sort((a, b) => new Date(typeof b.createdAt === 'string' ? b.createdAt : b.createdAt.toISOString()).getTime() - new Date(typeof a.createdAt === 'string' ? a.createdAt : a.createdAt.toISOString()).getTime()).slice(0, 3);
 
   const loading = jobsLoading || applicantsLoading || screeningLoading;
 
@@ -117,7 +117,7 @@ export default function DashboardPage() {
                         </p>
                       </div>
                       <span className="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full">
-                        {new Date(shortlist.createdAt).toLocaleDateString()}
+                        {new Date(typeof shortlist.createdAt === 'string' ? shortlist.createdAt : shortlist.createdAt.toISOString()).toLocaleDateString()}
                       </span>
                     </div>
                   ))

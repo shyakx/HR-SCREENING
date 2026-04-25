@@ -55,6 +55,19 @@ export const updateJob = createAsyncThunk(
   }
 );
 
+export const fetchJobById = createAsyncThunk(
+  'jobs/fetchJobById',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await jobsApi.getJobById(id);
+      const resData = response.data as any;
+      return resData.data || resData;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch job');
+    }
+  }
+);
+
 export const deleteJob = createAsyncThunk(
   'jobs/deleteJob',
   async (id: string, { rejectWithValue }) => {
@@ -101,6 +114,18 @@ const jobsSlice = createSlice({
         state.jobs.push(action.payload);
       })
       .addCase(createJob.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchJobById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchJobById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentJob = action.payload;
+      })
+      .addCase(fetchJobById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })

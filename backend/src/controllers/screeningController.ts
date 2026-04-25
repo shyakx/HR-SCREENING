@@ -33,14 +33,20 @@ export class ScreeningController {
         });
       }
 
-      // Get applicants
-      const applicants = await Applicant.find({ _id: { $in: applicantIds } });
+      // Get applicants who applied for this specific job
+      const applicants = await Applicant.find({ 
+        _id: { $in: applicantIds },
+        appliedJobs: jobId 
+      });
+      
       if (applicants.length === 0) {
         return res.status(404).json({
           success: false,
-          message: 'No applicants found'
+          message: 'No applicants found who applied for this position'
         });
       }
+      
+      console.log(`[DEBUG] Found ${applicants.length} applicants who applied for this job`);
 
       // Initialize Gemini service and run screening
       const geminiService = new GeminiService();
@@ -54,8 +60,7 @@ export class ScreeningController {
         console.log('[DEBUG] Gemini failed, falling back to local scoring:', geminiError.message);
         
         // Fallback to local scoring service
-        const localScoringService = new LocalScoringService();
-        screeningResults = await localScoringService.screenCandidates(job, applicants);
+        screeningResults = LocalScoringService.scoreCandidates(job, applicants);
         console.log('[DEBUG] Local scoring returned:', screeningResults.length, 'results');
       }
 

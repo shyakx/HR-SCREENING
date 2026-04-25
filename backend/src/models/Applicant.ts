@@ -25,6 +25,7 @@ export interface IApplicant extends Document {
   resumeUrl?: string;
   linkedinUrl?: string;
   portfolioUrl?: string;
+  appliedJobs: mongoose.Types.ObjectId[];
   source: 'umurava' | 'external';
   createdAt: Date;
   updatedAt: Date;
@@ -113,6 +114,10 @@ const ApplicantSchema: Schema = new Schema({
   portfolioUrl: {
     type: String,
   },
+  appliedJobs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Job'
+  }],
   source: {
     type: String,
     enum: ['umurava', 'external'],

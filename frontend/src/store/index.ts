@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import jobsReducer from './slices/jobsSlice';
 import applicantsReducer from './slices/applicantsSlice';
 import screeningReducer from './slices/screeningSlice';
+import quizReducer from './slices/quizSlice';
 import uiReducer from './slices/uiSlice';
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     jobs: jobsReducer,
     applicants: applicantsReducer,
     screening: screeningReducer,
+    quiz: quizReducer,
     ui: uiReducer,
   },
   middleware: (getDefaultMiddleware) =>

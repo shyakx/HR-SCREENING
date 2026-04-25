@@ -24,11 +24,24 @@ export const runScreening = createAsyncThunk(
   'screening/runScreening',
   async ({ jobId, applicantIds }: { jobId: string; applicantIds: string[] }, { rejectWithValue }) => {
     try {
+      console.log('🔄 Making API call to run screening...');
       const response = await screeningApi.runScreening(jobId, applicantIds);
+      console.log('📡 API Response:', response);
+      
       const resData = response.data as any;
-      return resData.data || resData;
+      console.log('📊 Response data:', resData);
+      
+      if (resData.success && resData.data) {
+        console.log('✅ Returning screening results:', resData.data.length);
+        return resData.data;
+      } else {
+        console.log('❌ API returned error:', resData);
+        return rejectWithValue(resData.message || 'Unknown error occurred');
+      }
     } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Failed to run screening';
+      console.error('💥 Network/API Error:', error);
+      
+      const errorMessage = error.response?.data?.message || error.message || 'Failed to run screening';
       const errorType = error.response?.data?.type;
       
       // Provide user-friendly messages for different error types
@@ -108,7 +121,11 @@ const screeningSlice = createSlice({
       })
       .addCase(runScreening.fulfilled, (state, action) => {
         state.loading = false;
-        state.results = action.payload;
+        // Add new results to existing results, avoiding duplicates
+        const newResults = action.payload;
+        const existingIds = new Set(state.results.map(r => r._id));
+        const uniqueNewResults = newResults.filter((r: any) => !existingIds.has(r._id));
+        state.results = [...state.results, ...uniqueNewResults];
         state.screeningProgress = 100;
       })
       .addCase(runScreening.rejected, (state, action) => {

@@ -87,7 +87,7 @@ export default function ShortlistsPage() {
                     For: <span className="font-semibold">{(shortlist.jobId as any)?.title || 'Unknown Job'}</span>
                   </p>
                   <p className="text-sm text-gray-500">
-                    Created {new Date(shortlist.createdAt).toLocaleDateString()} • {shortlist.candidates?.length || 0} candidates selected from {shortlist.totalApplicants} applicants
+                    Created {new Date(typeof shortlist.createdAt === 'string' ? shortlist.createdAt : shortlist.createdAt.toISOString()).toLocaleDateString()} • {shortlist.candidates?.length || 0} candidates selected from {shortlist.totalApplicants} applicants
                   </p>
                 </div>
                 <div className="flex gap-2">

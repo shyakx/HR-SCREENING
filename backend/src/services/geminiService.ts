@@ -243,4 +243,15 @@ Provide a 2-3 sentence summary that highlights the key aspects of this role and 
       return 'Professional summary not available.';
     }
   }
+
+  async generateContent(prompt: string): Promise<string> {
+    try {
+      const result = await this.model.generateContent(prompt);
+      const response = await result.response;
+      return response.text().trim();
+    } catch (error) {
+      console.error('Error generating content:', error);
+      throw error;
+    }
+  }
 }

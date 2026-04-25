@@ -12,6 +12,8 @@ import { MonitoringService } from './services/monitoringService';
 import jobRoutes from './routes/jobs';
 import applicantRoutes from './routes/applicants';
 import screeningRoutes from './routes/screening';
+import quizRoutes from './routes/quiz';
+import quizConfigurationRoutes from './routes/quizConfiguration';
 import healthRoutes from './routes/health';
 
 // Load environment variables
@@ -50,6 +52,8 @@ app.use('/health', healthRoutes);
 app.use('/api/jobs', rateLimiters.api, jobRoutes);
 app.use('/api/applicants', rateLimiters.api, applicantRoutes);
 app.use('/api/screening', rateLimiters.screening, screeningRoutes);
+app.use('/api/quiz', rateLimiters.api, quizRoutes);
+app.use('/api/quiz-configurations', rateLimiters.api, quizConfigurationRoutes);
 
 // File upload specific rate limiting
 app.use('/api/applicants/upload', rateLimiters.upload);
@@ -66,6 +70,7 @@ app.get('/api', (req, res) => {
       jobs: '/api/jobs',
       applicants: '/api/applicants',
       screening: '/api/screening',
+      quiz: '/api/quiz',
       health: '/health'
     },
     documentation: '/health',
