@@ -44,6 +44,7 @@
     "@types/pdf-parse": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
+    "@vercel/node": "^5.7.13",
     "eslint": "^8",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
