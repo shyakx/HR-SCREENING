@@ -411,7 +411,7 @@ const QuizAttemptSchema: Schema = new Schema({
 // Indexes for efficient querying
 QuizAttemptSchema.index({ jobId: 1, status: 1 });
 QuizAttemptSchema.index({ applicantId: 1 });
-QuizAttemptSchema.index({ quizSessionId: 1 });
+// quizSessionId index is already created by unique: true
 QuizAttemptSchema.index({ 'recommendation.fitLevel': 1 });
 QuizAttemptSchema.index({ 'analytics.authenticityScore': -1 });
 QuizAttemptSchema.index({ 'progression.startedAt': -1 });

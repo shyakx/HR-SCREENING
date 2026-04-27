@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 
 export const connectDB = async (): Promise<void> => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hr-screening';
+    const mongoURI = process.env.MONGODB_URI;
+    
+    if (!mongoURI) {
+      console.error('MONGODB_URI environment variable is not set');
+      return;
+    }
     
     const conn = await mongoose.connect(mongoURI, {
       serverSelectionTimeoutMS: 5000, // Keep trying for 5 seconds
