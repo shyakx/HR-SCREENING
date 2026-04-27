@@ -7,7 +7,7 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://hr-screening-backend.vercel.app",
+    "NEXT_PUBLIC_API_URL": "https://backend-mwd6ta62f-steven-shyakas-projects.vercel.app/api",
     "NEXT_PUBLIC_APP_NAME": "RecruitHub",
     "NEXT_PUBLIC_APP_DESCRIPTION": "AI-powered talent screening system"
   },

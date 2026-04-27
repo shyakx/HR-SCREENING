@@ -18,6 +18,11 @@
   "env": {
     "NODE_ENV": "production",
     "JWT_EXPIRE": "7d",
-    "MAX_FILE_SIZE": "10485760"
+    "MAX_FILE_SIZE": "10485760",
+    "FRONTEND_URL": "https://frontend-qzzj2m4dz-steven-shyakas-projects.vercel.app",
+    "MONGODB_URI": "mongodb://localhost:27017/recruiter-os",
+    "GEMINI_API_KEY": "AIzaSyAyFj8PHLFT5OOwRMvdHKe2msk7Jrfvqn0",
+    "JWT_SECRET": "1e0ce2d023ae3d62dc9779a06baccc30de94e74a6baa0fcda375ffd839bbce988c1a248ad802c994ec9b39de1c9decc5b506d89b16232e4a973d0ccc0d99d50d",
+    "PORT": "3001"
   }
 }

@@ -1,3 +1,5 @@
+
+
 # Dependencies
 node_modules/
 */node_modules/
@@ -6,6 +8,10 @@ node_modules/
 .env
 .env.local
 .env.*.local
+
+# Vercel configuration (contains sensitive env vars)
+vercel.json
+*/vercel.json
 
 # Logs
 logs/

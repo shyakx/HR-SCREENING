@@ -1,21 +1,22 @@
 # RecruitHub - Smart Talent Screening Platform
 
-A modern recruitment platform that helps hiring teams efficiently evaluate and shortlist candidates using AI-powered analysis. Built for the Umurava AI Hackathon, this system streamlines the hiring process by intelligently matching job requirements with applicant profiles using Google's Gemini AI.
+RecruitHub is a recruitment platform I built during the Umurava AI Hackathon to help hiring teams evaluate candidates more efficiently. It uses Google's Gemini AI to analyze how well applicants match job requirements and helps teams make better hiring decisions.
 
-## 🎥 Demo Video
+## 🚀 Live Demo
 
-Watch RecruitHub in action:
-[![RecruitHub Demo](https://img.youtube.com/vi/FObyLIV-G_c/0.jpg)](https://www.youtube.com/watch?v=FObyLIV-G_c)
+**Frontend**: [https://frontend-qzzj2m4dz-steven-shyakas-projects.vercel.app](https://frontend-qzzj2m4dz-steven-shyakas-projects.vercel.app)
+
+**Backend API**: [https://backend-8wzm4n2j5-steven-shyakas-projects.vercel.app](https://backend-8wzm4n2j5-steven-shyakas-projects.vercel.app)
 
 ## What It Does
 
-RecruitHub transforms how hiring teams evaluate candidates:
+Here's what RecruitHub can do for your hiring process:
 
-- **Job Management**: Post and manage job openings with detailed requirements and qualifications
-- **Candidate Database**: Build and organize your talent pool with applicant profiles from various sources
-- **Smart Screening**: Let AI analyze and rank candidates based on how well they match your job requirements
-- **Shortlist Creation**: Automatically generate and manage curated candidate lists with AI insights
-- **Hiring Analytics**: Track your recruitment pipeline with clear metrics and progress indicators
+- **Job Management**: Create and manage job postings with all the details you need
+- **Candidate Database**: Keep all your applicant information organized in one place
+- **Smart Screening**: Use AI to see how well candidates match your job requirements
+- **Shortlist Creation**: Build lists of top candidates with AI-powered insights
+- **Hiring Analytics**: Track your recruitment progress with clear, simple metrics
 
 ## Tech Stack
 
@@ -36,17 +37,17 @@ RecruitHub transforms how hiring teams evaluate candidates:
 - **Google Gemini API** - Advanced AI for candidate evaluation
 
 ### Hosting & Deployment
-- **Vercel** - Frontend hosting with automatic deployments
-- **Railway** - Backend hosting with easy scaling
-- **MongoDB Atlas** - Managed cloud database
+- **Vercel** - Full-stack hosting with serverless functions
+- **MongoDB** - Local development database
+- **Environment Variables** - Secure configuration management
 
 ## Quick Start
 
 ### What You'll Need
-- Node.js (v18 or newer)
-- npm or yarn package manager
-- MongoDB (local or MongoDB Atlas account)
-- Google Gemini API key (free from AI Studio)
+- Node.js 18 or newer
+- npm or yarn
+- MongoDB (local setup is easiest to start)
+- Google Gemini API key (free - get it from AI Studio)
 
 ### Installation Steps
 
@@ -56,17 +57,17 @@ git clone <repository-url>
 cd hr-solution
 ```
 
-**2. Install all dependencies**
+**2. Install everything**
 ```bash
 npm run install:all
 ```
 
-**3. Set up your environment**
+**3. Set up environment variables**
 
-Create a `.env` file in the backend folder:
+Create `backend/.env`:
 ```env
 MONGODB_URI=mongodb://localhost:27017/hr-screening
-PORT=5000
+PORT=3001
 NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 GEMINI_API_KEY=your_gemini_api_key_here
@@ -75,14 +76,14 @@ JWT_EXPIRE=7d
 MAX_FILE_SIZE=10485760
 ```
 
-Create a `.env.local` file in the frontend folder:
+Create `frontend/.env.local`:
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3001/api
 NEXT_PUBLIC_APP_NAME=RecruitHub
 NEXT_PUBLIC_APP_DESCRIPTION=Smart talent screening platform
 ```
 
-**4. Start the development servers**
+**4. Start development servers**
 ```bash
 npm run dev
 ```
@@ -91,13 +92,15 @@ This launches both applications:
 - **Frontend**: http://localhost:3000
 - **Backend**: http://localhost:3001
 
-Open http://localhost:3000 in your browser to start using RecruitHub.
+Open http://localhost:3000 to start using RecruitHub.
 
-**Important Notes:**
-- Make sure MongoDB is running before starting the backend
-- The backend API runs on port 3001 (not 5000)
-- Frontend environment variables need the `NEXT_PUBLIC_` prefix
-- Restart both servers after updating environment variables
+**Or try the live demo**: [https://frontend-qzzj2m4dz-steven-shyakas-projects.vercel.app](https://frontend-qzzj2m4dz-steven-shyakas-projects.vercel.app)
+
+**Quick Tips:**
+- Start MongoDB before running the backend
+- Backend runs on port 3001
+- Frontend env vars need `NEXT_PUBLIC_` prefix
+- Restart servers after changing env vars
 
 ## Project Overview
 
@@ -617,9 +620,9 @@ Built for the Umurava AI Hackathon, RecruitHub meets all competition requirement
 
 ✅ **Deployment:**
 - Frontend hosted on Vercel
-- Backend deployed on Railway
-- MongoDB Atlas for database
-- Environment-based configuration
+- Backend deployed on Vercel serverless functions
+- MongoDB for database
+- Environment-based configuration with secure variable management
 
 ## License
 
